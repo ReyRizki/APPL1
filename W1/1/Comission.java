@@ -20,4 +20,24 @@ public class Comission extends Hourly
         this.commissionRate = commissionRate;
         this.totalSales = 0;
     }
+
+    public void addSales(double totalSales)
+    {
+        this.totalSales += totalSales;
+    }
+
+    public double pay() {
+        double commissionHonor = totalSales * commissionRate;
+        this.totalSales = 0;
+
+        return super.pay() + commissionHonor;
+    }
+
+    public String toString()
+    {
+        String result = super.toString();
+        result += "\nTotal Sales: " + totalSales;
+
+        return result;
+    }
 }
