@@ -6,6 +6,7 @@
 //
 // ****************************************************************
 import java.util.Scanner;
+import java.util.*;
 
 public class IntegerListTest {
     static IntegerList list = new IntegerList(10);
@@ -25,13 +26,24 @@ public class IntegerListTest {
         }
     }
 
+    public static void timer(int callback) {
+        long time1, time2;
+
+        time1 = System.currentTimeMillis();
+        callback.accept();
+
+        time2 = System.currentTimeMillis();
+
+        System.out.println(time1 - time2);
+    }
+
     // ------------------------------------------------------
     // dispatch -- takes a choice and does what needs doing
     // ------------------------------------------------------
     public static void dispatch(int choice) {
         int loc;
         int val;
-        long time1, time2;
+
         switch (choice) {
         case 0:
             System.out.println("Bye!");
@@ -76,7 +88,7 @@ public class IntegerListTest {
             System.out.println("List has been sorted.");
             break;
         case 8:
-            // list.sortDecreasing();
+            list.sortDecreasing();
             System.out.println("List has been sorted.");
             break;
         default:

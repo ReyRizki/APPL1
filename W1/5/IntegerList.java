@@ -60,7 +60,7 @@ public class IntegerList {
         return location;
     }
 
-    private int minIndex(int start) {
+    private int minIndex(int arr[], int start) {
         int result = start;
 
         for (int i = start; i < this.list.length; i++) {
@@ -72,7 +72,7 @@ public class IntegerList {
         return result;
     }
 
-    private void swap(int a, int b) {
+    private void swap(int arr[], int a, int b) {
         int temp = this.list[a];
         this.list[a] = this.list[b];
         this.list[b] = temp;
@@ -83,8 +83,8 @@ public class IntegerList {
     // ------------------------------------------------------------
     public void sortIncreasing() {
         for (int i = 0; i < list.length - 1; i++) {
-            int minIndex = minIndex(i);
-            swap(i, minIndex);
+            int minIndex = minIndex(this.list, i);
+            swap(this.list, i, minIndex);
         }
     }
 
@@ -105,5 +105,22 @@ public class IntegerList {
         }
 
         return result;
+    }
+
+    public void sortDecreasing() {
+        int n = this.list.length;
+        for (int i = 1; i < n; ++i) {
+            int key = this.list[i];
+            int j = i - 1;
+
+            /* Move elements of this.list[0..i-1], that are
+               greater than key, to one position ahead
+               of their current position */
+            while (j >= 0 && this.list[j] < key) {
+                this.list[j + 1] = this.list[j];
+                j = j - 1;
+            }
+            this.list[j + 1] = key;
+        }
     }
 }
