@@ -87,4 +87,23 @@ public class IntegerList {
             swap(i, minIndex);
         }
     }
+
+    public int binarySearch(int n) {
+        int l = 0, r = this.list.length - 1;
+        int result = -1;
+
+        while ((l <= r) && (result == -1)) {
+            int m = (l + r) / 2;
+
+            if (this.list[m] == n) {
+                result = m;
+            } else if (n < this.list[m]) {
+                r = m;
+            } else if (n > this.list[m]) {
+                l = m;
+            }
+        }
+
+        return result;
+    }
 }
