@@ -64,7 +64,8 @@ public class IntegerListTest {
         case 6:
             System.out.print("Enter the value to look for: ");
             val = scan.nextInt();
-            loc = list.binarySearch(val);
+            loc = -1;
+            // loc = list.binarySearch(val);
             if (loc != -1)
                 System.out.println("Found at location " + loc);
             else
@@ -75,7 +76,7 @@ public class IntegerListTest {
             System.out.println("List has been sorted.");
             break;
         case 8:
-            list.sortDecreasing();
+            // list.sortDecreasing();
             System.out.println("List has been sorted.");
             break;
         default:

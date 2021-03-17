@@ -60,13 +60,31 @@ public class IntegerList {
         return location;
     }
 
+    private int minIndex(int start) {
+        int result = start;
+
+        for (int i = start; i < this.list.length; i++) {
+            if (this.list[i] < this.list[result]) {
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
+    private void swap(int a, int b) {
+        int temp = this.list[a];
+        this.list[a] = this.list[b];
+        this.list[b] = temp;
+    }
+
     // ------------------------------------------------------------
     // sortIncreasing -- uses selection sort
     // ------------------------------------------------------------
     public void sortIncreasing() {
         for (int i = 0; i < list.length - 1; i++) {
-            int minIndex = minIndex(list, i);
-            swap(list, i, minIndex);
+            int minIndex = minIndex(i);
+            swap(i, minIndex);
         }
     }
 }
