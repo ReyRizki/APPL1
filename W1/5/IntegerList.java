@@ -98,9 +98,9 @@ public class IntegerList {
             if (this.list[m] == n) {
                 result = m;
             } else if (n < this.list[m]) {
-                r = m;
+                r = m - 1;
             } else if (n > this.list[m]) {
-                l = m;
+                l = m + 1;
             }
         }
 
