@@ -39,6 +39,12 @@ public class CirclePanel extends JPanel {
         up.addActionListener(new MoveListener(0, -20));
         down.addActionListener(new MoveListener(0, 20));
 
+        // Add tooltip
+        left.setToolTipText("Move circle 20 pixels left");
+        right.setToolTipText("Move circle 20 pixels right");
+        up.setToolTipText("Move circle 20 pixels up");
+        down.setToolTipText("Move circle 20 pixels down");
+
         // Set mnemonic
         left.setMnemonic(KeyEvent.VK_L);
         right.setMnemonic(KeyEvent.VK_R);
