@@ -8,6 +8,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 public class RatePanel extends JPanel {
     private static final long serialVersionUID = 8723783211268116514L;
@@ -24,6 +25,8 @@ public class RatePanel extends JPanel {
     // the currency, and a label to display the result.
     // ------------------------------------------------------------
     public RatePanel() {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         JLabel title = new JLabel("How much is that in dollars?");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 20));
@@ -35,18 +38,19 @@ public class RatePanel extends JPanel {
 
         rate = new double[] { 1.2103, 0.7351, 0.0091, 0.6969, 0.0222, 0.0880 };
         result = new JLabel(" ------------ ");
-        add(title);
 
         // ComboBox
         cb = new JComboBox<String>(currencyName);
         cb.addActionListener(new ConvertListener());
-        add(cb, BorderLayout.CENTER);
 
         // Text Field
         textField = new JTextField(16);
+        textField.setPreferredSize(new Dimension(120, 20));
         textField.addActionListener(new ConvertListener());
-        add(textField);
 
+        add(title);
+        add(cb, BorderLayout.CENTER);
+        add(textField);
         add(result);
     }
 
