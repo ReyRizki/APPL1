@@ -4,7 +4,6 @@
 //
 // Computes the dollar value of the cost of an item in another currency.
 // ***********************************************************************
-import java.awt.*;
 import javax.swing.*;
 
 public class CurrencyConverter {

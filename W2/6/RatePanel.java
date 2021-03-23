@@ -10,10 +10,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class RatePanel extends JPanel {
+    private static final long serialVersionUID = 8723783211268116514L;
     private double[] rate; // exchange rates
     private String[] currencyName;
     private JLabel result;
-    private JComboBox cb;
+    private JComboBox<String> cb;
     private JTextField textField;
 
     // ------------------------------------------------------------
@@ -32,17 +33,18 @@ public class RatePanel extends JPanel {
                 "Canadian Dollar", "Japanese Yen", "Australian Dollar",
                 "Indian Rupee", "Mexican Peso" };
 
-        rate = new double[] { 0.0, 1.2103, 0.7351, 0.0091, 0.6969, 0.0222, 0.0880 };
+        rate = new double[] { 1.2103, 0.7351, 0.0091, 0.6969, 0.0222, 0.0880 };
         result = new JLabel(" ------------ ");
         add(title);
 
         // ComboBox
-        cb = new JComboBox(currencyName);
-        cb.addActionListener(new ComboListener());
-        add(cb);
+        cb = new JComboBox<String>(currencyName);
+        cb.addActionListener(new ConvertListener());
+        add(cb, BorderLayout.CENTER);
 
         // Text Field
-        textField = new JTextField(20);
+        textField = new JTextField(16);
+        textField.addActionListener(new ConvertListener());
         add(textField);
 
         add(result);
@@ -51,23 +53,25 @@ public class RatePanel extends JPanel {
     // ******************************************************
     // Represents an action listener for the combo box.
     // ******************************************************
-    private class ComboListener implements ActionListener {
+    private class ConvertListener implements ActionListener {
         // --------------------------------------------------
         // Determines which currency has been selected and
         // the value in that currency then computes and
         // displays the value in U.S. Dollars.
         // --------------------------------------------------
         public void actionPerformed(ActionEvent event) {
-            int index = cb.getSelectedIndex();
-            // int index = 0;
-            // result.setText(textField.getText());
-            //
+            try {
+                int index = cb.getSelectedIndex();
+                double amount = Double.parseDouble(textField.getText());
+                double converted = amount * rate[index - 1];
 
-            double amount = Double.parseDouble(textField.getText());
-            double converted = amount * rate[index];
-
-            result.setText(amount + " " + currencyName[index] + " = "
-                    + converted + " U.S. Dollars");
+                result.setText(amount + " " + currencyName[index] + " = "
+                        + converted + " U.S. Dollars");
+            } catch (NumberFormatException e) {
+                result.setText("Input a number");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                result.setText("Select a currency");
+            }
         }
     }
 }
