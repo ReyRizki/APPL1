@@ -5,7 +5,6 @@
 // Uses CirclePanel to display a GUI that lets the user move
 // a circle by pressing buttons.
 // ******************************************************************
-import java.awt.*;
 import javax.swing.*;
 
 public class MoveCircle {

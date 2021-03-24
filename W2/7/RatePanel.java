@@ -8,7 +8,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 public class RatePanel extends JPanel {
     private static final long serialVersionUID = 8723783211268116514L;

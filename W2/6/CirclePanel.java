@@ -7,18 +7,23 @@
 // ******************************************************************
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.event.*;
 
 public class CirclePanel extends JPanel {
+    private static final long serialVersionUID = 3821260422679725148L;
     private final int CIRCLE_SIZE = 50;
     private int x, y;
     private Color c;
+    private JButton left, right, up, down;
+    private int width, height;
 
     // ---------------------------------------------------------------
     // Set up circle and buttons to move it.
     // ---------------------------------------------------------------
     public CirclePanel(int width, int height) {
+        this.width = width;
+        this.height = height;
+
         // Set coordinates so circle starts in middle
         x = (width / 2) - (CIRCLE_SIZE / 2);
         y = (height / 2) - (CIRCLE_SIZE / 2);
@@ -28,10 +33,10 @@ public class CirclePanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Create buttons to move the circle
-        JButton left = new JButton("Left");
-        JButton right = new JButton("Right");
-        JButton up = new JButton("Up");
-        JButton down = new JButton("Down");
+        left = new JButton("Left");
+        right = new JButton("Right");
+        up = new JButton("Up");
+        down = new JButton("Down");
 
         // Add listeners to the buttons
         left.addActionListener(new MoveListener(-20, 0));
@@ -91,8 +96,21 @@ public class CirclePanel extends JPanel {
         // Change x and y coordinates and repaint.
         // ---------------------------------------------------------------
         public void actionPerformed(ActionEvent e) {
+            int lw = width - CIRCLE_SIZE, lh = height - CIRCLE_SIZE - 70;
+
             x += dx;
             y += dy;
+
+            x = Math.max(0, x);
+            x = Math.min(lw, x);
+            y = Math.max(0, y);
+            y = Math.min(lh, y);
+
+            left.setEnabled(x > 0);
+            right.setEnabled(x < lw);
+            up.setEnabled(y > 0);
+            down.setEnabled(y < lh);
+
             repaint();
         }
     }
