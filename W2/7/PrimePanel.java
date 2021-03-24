@@ -14,8 +14,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 public class PrimePanel extends JPanel {
     private static final long serialVersionUID = -4864985926777163520L;
@@ -32,17 +34,23 @@ public class PrimePanel extends JPanel {
     public PrimePanel() {
         JLabel heading = new JLabel("Prime Number Listing");
         heading.setFont(new Font("Helvetica", Font.BOLD, 30));
+
         JLabel inputLabel = new JLabel("Enter a number: ");
         number = new JTextField(8);
         computeButton = new JButton("Click to see all primes up to your number!");
         primeList = new JTextArea(10, 30);
         computeButton.addActionListener(new ButtonListener());
+
+        // Scroll pane
+        JScrollPane scrollPane = new JScrollPane(primeList);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         // Add the components to the panel
         add(heading);
         add(inputLabel);
         add(number);
         add(computeButton);
-        add(primeList);
+        add(scrollPane);
         setPreferredSize(new Dimension(400, 320));
         setBackground(Color.yellow);
     }
